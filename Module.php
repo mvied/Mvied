@@ -13,9 +13,16 @@ class Mvied_Module {
 	/**
 	 * Plugin object that this module extends
 	 *
-	 * @var Mvied
+	 * @var Mvied_Plugin
 	 */
 	protected $_plugin;
+
+	/**
+	 * Theme object that this module extends
+	 *
+	 * @var Mvied_Theme
+	 */
+	protected $_theme;
 
 	/**
 	 * Set Plugin
@@ -28,7 +35,19 @@ class Mvied_Module {
 		$this->_plugin = $plugin;		
 		return $this;
 	}
-	
+
+	/**
+	 * Set Theme
+	 * 
+	 * @param Mvied_Theme $theme
+	 * @return object $this
+	 * @uses Mvied_Theme
+	 */
+	public function setTheme( Mvied_Theme $theme ) {
+		$this->_theme = $theme;
+		return $this;
+	}
+
 	/**
 	 * Get Plugin
 	 * 
@@ -42,5 +61,19 @@ class Mvied_Module {
 		
 		return $this->_plugin;
 	}
-	
+
+	/**
+	 * Get Theme
+	 * 
+	 * @param none
+	 * @return Mvied_Theme
+	 */
+	public function getTheme() {
+		if ( ! isset($this->_theme) ) {
+			die('Module ' . __CLASS__ . ' missing Theme dependency.');
+		}
+
+		return $this->_theme;
+	}
+
 }
