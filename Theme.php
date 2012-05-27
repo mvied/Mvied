@@ -22,7 +22,7 @@ class Mvied_Theme {
 	/**
 	 * Logger
 	 *
-	 * @var Mvied_Logger
+	 * @var Mvied_Logger_Interface
 	 */
 	protected $_logger;
 
