@@ -22,7 +22,7 @@ class Mvied_Theme {
 	/**
 	 * Logger
 	 *
-	 * @var WordPressHTTPS_Logger
+	 * @var Mvied_Logger
 	 */
 	protected $_logger;
 
@@ -150,7 +150,7 @@ class Mvied_Theme {
 	 * @param object $logger
 	 * @return object $this
 	 */
-	public function setLogger( WordPressHTTPS_Logger_Interface $logger ) {
+	public function setLogger( Mvied_Logger_Interface $logger ) {
 		$this->_logger = $logger;	
 		return $this;
 	}
