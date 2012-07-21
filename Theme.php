@@ -4,35 +4,37 @@
  * @package Mvied
  */
 class Mvied_Theme {
-
+	/**
+	 * Base directory
+	 *
+	 * @var string
+	 */
+	protected $_directory;
+	
 	/**
 	 * Module directory
 	 *
 	 * @var string
 	 */
 	protected $_module_directory;
-
 	/**
 	 * Loaded Modules
 	 *
 	 * @var array
 	 */
 	protected $_modules = array();
-
 	/**
 	 * Logger
 	 *
 	 * @var Mvied_Logger_Interface
 	 */
 	protected $_logger;
-
 	/**
 	 * Theme Settings
 	 *
 	 * @var array
 	 */
 	protected $_settings = array();
-
 	/**
 	 * Theme Slug
 	 *
@@ -48,6 +50,27 @@ class Mvied_Theme {
 	 * @var string
 	 */
 	protected $_version;
+	
+	/**
+	 * Set Directory
+	 * 
+	 * @param string $directory
+	 * @return object $this
+	 */
+	public function setDirectory( $directory ) {
+		$this->_directory = $directory;
+		return $this;
+	}
+	
+	/**
+	 * Get Directory
+	 * 
+	 * @param none
+	 * @return string
+	 */
+	public function getDirectory() {
+		return $this->_directory;
+	}
 	
 	/**
 	 * Set Module Directory
@@ -98,7 +121,6 @@ class Mvied_Theme {
 		}
 		return $modules;
 	}
-
 	/**
 	 * Get Module
 	 *
@@ -115,7 +137,6 @@ class Mvied_Theme {
 		
 		die('Module not found: \'' . $module . '\'.');
 	}
-
 	/**
 	 * Get Modules
 	 * 
@@ -143,7 +164,6 @@ class Mvied_Theme {
 		$this->_modules[$module] = $object;
 		return $this;
 	}
-
 	/**
 	 * Set Logger
 	 * 
@@ -168,7 +188,6 @@ class Mvied_Theme {
 		
 		return $this->_logger->getInstance();
 	}
-
 	/**
 	 * Get Theme Setting
 	 *
@@ -183,7 +202,6 @@ class Mvied_Theme {
 		} else {
 			$value = get_option($setting_full);
 		}
-
 		// Load default option
 		if ( $value === false ) {
 			$value = $this->_settings[$setting];
@@ -199,7 +217,6 @@ class Mvied_Theme {
 		}
 		return $value;
 	}
-
 	/**
 	 * Get Theme Settings
 	 *
@@ -280,7 +297,6 @@ class Mvied_Theme {
 		}
 		return $this;
 	}
-
 	/**
 	 * Is Module Loaded?
 	 *
@@ -294,7 +310,6 @@ class Mvied_Theme {
 			return false;
 		}
 	}
-
 	/**
 	 * Load Module
 	 *
@@ -312,7 +327,6 @@ class Mvied_Theme {
 		$filename = $filename . '.php';
 		
 		require_once($this->getModuleDirectory() . $filename);
-
 		$class = $base_class . '_' . str_replace('\\', '_', $module_full);
 		if ( ! isset($this->_modules[$class]) || ! is_object($this->_modules[$class]) || get_class($this->_modules[$class]) != $class ) {
 			try {
@@ -323,10 +337,8 @@ class Mvied_Theme {
 				die('Unable to load module: \'' . $module . '\'. ' . $e->getMessage());
 			}
 		}
-
 		return $this;
 	}
-
 	/**
 	 * Load Modules
 	 * 
@@ -339,13 +351,11 @@ class Mvied_Theme {
 		if ( sizeof($modules) == 0 ) {
 			$modules = $this->getAvailableModules();
 		}
-
 		foreach( $modules as $module ) {
 			$this->loadModule( $module );
 		}
 		return $this;
 	}
-
 	/**
 	 * Unload Module
 	 *
@@ -359,14 +369,11 @@ class Mvied_Theme {
 			$base_class = get_class($this);
 		}
 		$module = 'Module\\' . $module;
-
 		$modules = $this->getModules();
 		
 		unset($modules[$module]);
 		
 		$this->_modules = $modules;
-
 		return $this;
 	}
-
 }
