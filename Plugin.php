@@ -336,6 +336,9 @@ class Mvied_Plugin {
 		foreach( $modules as $module ) {
 			$module->init();
 		}
+		if ( isset($this->_slug) ) {
+			do_action($this->_slug . '_init');
+		}
 		return $this;
 	}
 
