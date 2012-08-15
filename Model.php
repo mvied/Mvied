@@ -1,6 +1,6 @@
 <?php
 /**
- * Model class for a WordPress.
+ * Model class for a WordPress theme or plugin.
  *
  * @author Mike Ems
  * @package Mvied

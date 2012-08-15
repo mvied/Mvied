@@ -1,5 +1,7 @@
 <?php
 /**
+ * Base class for a WordPress theme.
+ *
  * @author Mike Ems
  * @package Mvied
  */
