@@ -8,7 +8,7 @@
  * @author Mike Ems
  * @package Mvied
  */
-class Mvied_Plugin_Module {
+class Mvied_Plugin_Module implements Mvied_Plugin_Module_Interface {
 
 	/**
 	 * Plugin object that this module extends

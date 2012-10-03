@@ -8,7 +8,7 @@
  * @author Mike Ems
  * @package Mvied
  */
-class Mvied_Theme_Module {
+class Mvied_Theme_Module implements Mvied_Theme_Module_Interface {
 
 	/**
 	 * Theme object that this module extends
