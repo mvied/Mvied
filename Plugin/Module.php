@@ -18,6 +18,16 @@ class Mvied_Plugin_Module implements Mvied_Plugin_Module_Interface {
 	protected $_plugin;
 
 	/**
+	 * 
+	 * Initializes the module
+	 * @param none
+	 * @return void
+	 */
+	public function init() {
+		throw new Exception('No init method in ' . get_class($this));
+	}
+
+	/**
 	 * Set Plugin
 	 * 
 	 * @param Mvied_Plugin $plugin

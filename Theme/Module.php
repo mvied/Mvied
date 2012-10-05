@@ -18,6 +18,16 @@ class Mvied_Theme_Module implements Mvied_Theme_Module_Interface {
 	protected $_theme;
 
 	/**
+	 * 
+	 * Initializes the module
+	 * @param none
+	 * @return void
+	 */
+	public function init() {
+		throw new Exception('No init method in ' . get_class($this));
+	}
+
+	/**
 	 * Set Theme
 	 * 
 	 * @param Mvied_Theme $theme
