@@ -243,7 +243,7 @@ class Mvied_Plugin {
 		}
 
 		// Load default option
-		if ( $value === false ) {
+		if ( $value === false && array_key_exists($setting, $this->_settings) ) {
 			$value = $this->_settings[$setting];
 		}
 		// Convert 1's and 0's to boolean
