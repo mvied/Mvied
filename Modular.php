@@ -13,7 +13,7 @@ class Mvied_Modular {
 	 * @var string
 	 */
 	protected $_directory;
-	
+
 	/**
 	 * Module directory
 	 *
@@ -50,7 +50,7 @@ class Mvied_Modular {
 	 * @var string
 	 */
 	protected $_slug;
-	
+
 	/**
 	 * Version
 	 *
@@ -75,7 +75,7 @@ class Mvied_Modular {
 		$this->_directory = $directory;
 		return $this;
 	}
-	
+
 	/**
 	 * Get Directory
 	 * 
@@ -85,7 +85,7 @@ class Mvied_Modular {
 	public function getDirectory() {
 		return $this->_directory;
 	}
-	
+
 	/**
 	 * Set Module Directory
 	 * 
@@ -96,7 +96,7 @@ class Mvied_Modular {
 		$this->_module_directory = $module_directory;
 		return $this;
 	}
-	
+
 	/**
 	 * Get Module Directory
 	 * 
@@ -106,7 +106,7 @@ class Mvied_Modular {
 	public function getModuleDirectory() {
 		return $this->_module_directory;
 	}
-	
+
 	/**
 	 * Get Available Modules
 	 *
@@ -149,7 +149,7 @@ class Mvied_Modular {
 				return $this->_modules[$module];
 			}
 		}
-		
+
 		die('Module not found: \'' . $module . '\'.');
 	}
 
@@ -168,7 +168,7 @@ class Mvied_Modular {
 		}
 		return $modules;
 	}
-	
+
 	/**
 	 * Set Module
 	 *
@@ -188,10 +188,10 @@ class Mvied_Modular {
 	 * @return object $this
 	 */
 	public function setLogger( Mvied_Logger_Interface $logger ) {
-		$this->_logger = $logger;	
+		$this->_logger = $logger;
 		return $this;
 	}
-	
+
 	/**
 	 * Get Logger
 	 * 
@@ -202,7 +202,7 @@ class Mvied_Modular {
 		if ( ! isset($this->_logger) ) {
 			die(__CLASS__ . ' missing Logger dependency.');
 		}
-		
+
 		return $this->_logger->getInstance();
 	}
 
@@ -275,7 +275,7 @@ class Mvied_Modular {
 		$this->_slug = $slug;
 		return $this;
 	}
-	
+
 	/**
 	 * Get Slug
 	 * 
@@ -285,7 +285,7 @@ class Mvied_Modular {
 	public function getSlug() {
 		return $this->_slug;
 	}
-	
+
 	/**
 	 * Set Version
 	 * 
@@ -296,7 +296,7 @@ class Mvied_Modular {
 		$this->_version = $version;
 		return $this;
 	}
-	
+
 	/**
 	 * Get Version
 	 * 
@@ -387,7 +387,7 @@ class Mvied_Modular {
 		$module_full = 'Module\\' . $module;
 		$filename = str_replace('\\', '/', $module);
 		$filename = $filename . '.php';
-		
+
 		require_once($this->getModuleDirectory() . $filename);
 
 		$class = $base_class . '_' . str_replace('\\', '_', $module_full);
@@ -403,7 +403,7 @@ class Mvied_Modular {
 
 		return $this;
 	}
-	
+
 	/**
 	 * Load Modules
 	 * 
@@ -438,9 +438,9 @@ class Mvied_Modular {
 		$module = 'Module\\' . $module;
 
 		$modules = $this->getModules();
-		
+
 		unset($modules[$module]);
-		
+
 		$this->_modules = $modules;
 
 		return $this;
