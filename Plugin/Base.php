@@ -1,11 +1,11 @@
 <?php
 /**
- * Base class for a WordPress plugin.
+ * Base Plugin
  *
  * @author Mike Ems
  * @package Mvied
  */
-class Mvied_Plugin extends Mvied_Modular {
+class Mvied_Plugin_Base extends Mvied_Base {
 
 	/**
 	 * Plugin URL
@@ -16,7 +16,7 @@ class Mvied_Plugin extends Mvied_Modular {
 
 	/**
 	 * Set Plugin Url
-	 * 
+	 *
 	 * @param string $plugin_url
 	 * @return object $this
 	 */
@@ -27,7 +27,7 @@ class Mvied_Plugin extends Mvied_Modular {
 
 	/**
 	 * Get Plugin Url
-	 * 
+	 *
 	 * @param none
 	 * @return string
 	 */

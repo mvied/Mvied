@@ -30,11 +30,11 @@ class Mvied_Plugin_Module implements Mvied_Plugin_Module_Interface {
 	/**
 	 * Set Plugin
 	 * 
-	 * @param Mvied_Plugin $plugin
+	 * @param Mvied_Plugin_Modular $plugin
 	 * @return object $this
 	 * @uses Mvied_Plugin
 	 */
-	public function setPlugin( Mvied_Plugin $plugin ) {
+	public function setPlugin( Mvied_Plugin_Modular $plugin ) {
 		$this->_plugin = $plugin;		
 		return $this;
 	}
