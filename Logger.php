@@ -47,6 +47,17 @@ class Mvied_Logger implements Mvied_Logger_Interface {
 	}
 
 	/**
+	 * Sets log array
+	 *
+	 * @param array $log
+	 * @return $this
+	 */
+	public function setLog( array $log = array() ) {
+		$this->_log = $log;
+		return $this;
+	}
+
+	/**
 	 * Adds a string to an array of log entries
 	 *
 	 * @param string $string
