@@ -68,8 +68,6 @@ class Mvied_Logger implements Mvied_Logger_Interface {
 	public function consoleLog() {
 		$code = "<script type=\"text/javascript\">\n\tif ( typeof console === 'object' ) {\n";
 		$log = $this->getLog();
-		array_unshift($log, '[BEGIN WordPress HTTPS Debug Log]');
-		array_push($log, '[END WordPress HTTPS Debug Log]');
 		foreach( $log as $log_entry ) {
 			if ( is_array($log_entry) ) {
 				$log_entry = json_encode($log_entry);
