@@ -497,14 +497,14 @@ class Mvied_Url {
 		@preg_match_all('/((http|https):\/\/[^\'"]+)[\'"\)]?/i', $string, $url_parts);
 		if ( isset($url_parts[1][0]) ) {
 			if ( $url_parts = parse_url( $url_parts[1][0] ) ) {
-				$url->setScheme(@$url_parts['scheme']);
-				$url->setUser(@$url_parts['user']);
-				$url->setPass(@$url_parts['pass']);
-				$url->setHost(@$url_parts['host']);
-				$url->setPort(@$url_parts['port']);
-				$url->setPath(@$url_parts['path']);
-				$url->setQuery(@$url_parts['query']);
-				$url->setFragment(@$url_parts['fragment']);
+				$url->setScheme( isset($url_parts['scheme']) ? $url_parts['scheme'] : null );
+				$url->setUser( isset($url_parts['user']) ? $url_parts['user'] : null );
+				$url->setPass( isset($url_parts['pass']) ? $url_parts['pass'] : null );
+				$url->setHost( isset($url_parts['host']) ? $url_parts['host'] : null );
+				$url->setPort( isset($url_parts['port']) ? $url_parts['port'] : null );
+				$url->setPath( isset($url_parts['path']) ? $url_parts['path'] : null );
+				$url->setQuery( isset($url_parts['query']) ? $url_parts['query'] : null );
+				$url->setFragment( isset($url_parts['fragment']) ? $url_parts['fragment'] : null );
 				return $url;
 			}
 		} else {
