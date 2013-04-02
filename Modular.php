@@ -150,38 +150,6 @@ class Mvied_Modular extends Mvied_Base {
 	}
 
 	/**
-	 * Load Module
-	 *
-	 * @param string $module
-	 * @return $this
-	 */
-	public function loadModule( $module ) {
-		if ( strpos(get_class($this), '_') !== false ) {
-			$base_class = substr(get_class($this), 0, strpos(get_class($this), '_'));
-		} else {
-			$base_class = get_class($this);
-		}
-		$module_full = 'Module\\' . $module;
-		$filename = str_replace('\\', '/', $module);
-		$filename = $filename . '.php';
-
-		require_once($this->getModuleDirectory() . $filename);
-
-		$class = $base_class . '_' . str_replace('\\', '_', $module_full);
-		if ( ! isset($this->_modules[$class]) || ! is_object($this->_modules[$class]) || get_class($this->_modules[$class]) != $class ) {
-			try {
-				$object = new $class;
-				$this->setModule($module_full, $object);
-				$this->getModule($module)->setPlugin($this);
-			} catch ( Exception $e ) {
-				die('Unable to load module: \'' . $module . '\'. ' . $e->getMessage());
-			}
-		}
-
-		return $this;
-	}
-
-	/**
 	 * Load Modules
 	 * 
 	 * Load specified modules. If no modules are specified, all modules are loaded.
@@ -207,11 +175,7 @@ class Mvied_Modular extends Mvied_Base {
 	 * @return $this
 	 */
 	public function unloadModule( $module ) {
-		if ( strpos(get_class($this), '_') !== false ) {
-			$base_class = substr(get_class($this), 0, strpos(get_class($this), '_'));
-		} else {
-			$base_class = get_class($this);
-		}
+		$base_class = get_class($this);
 		$module = 'Module\\' . $module;
 
 		$modules = $this->getModules();
