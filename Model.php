@@ -7,12 +7,33 @@
  */
 class Mvied_Model {
 
+	/**
+	 * Post
+	 *
+	 * @var stdClass
+	 */
 	protected $_post;
 
+	/**
+	 * Post ID
+	 *
+	 * @var int
+	 */
 	public $ID;
 
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
 	public $name;
 
+	/**
+	 * Instantiate Model from ID
+	 *
+	 * @param int $id
+	 * @return void
+	 */
 	public function __construct( $id ) {
 		if ( ! isset($id) ) {
 			return $this;
@@ -32,14 +53,32 @@ class Mvied_Model {
 		}
 	}
 
+	/**
+	 * Getter
+	 *
+	 * @param string $property
+	 * @return mixed
+	 */
 	public function __get( $property ) {
 		return get_post_meta($this->ID, $property, true);
 	}
 
+	/**
+	 * Ge Post
+	 *
+	 * @param none
+	 * @return stdClass
+	 */
 	public function getPost() {
 		return $this->_post;
 	}
 
+	/**
+	 * Load from Array
+	 *
+	 * @param array $array
+	 * @return mixed
+	 */
 	public function load( $array = array() ) {
 		foreach($array as $key => $value) {
 			if ( property_exists($this, $key) ) {
@@ -48,12 +87,18 @@ class Mvied_Model {
 		}
 	}
 
+	/**
+	 * Save
+	 *
+	 * @param none
+	 * @return void
+	 */
 	public function save() {
 		$reflect = new ReflectionClass($this);
 		$properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC);
 		foreach($properties as $property) {
 			$property = $property->getName();
-			if ( strpos($property, '_') !== 0 ) {
+			if ( !in_array($property, array('ID','name')) && strpos($property, '_') !== 0 ) {
 				update_post_meta($this->_post->ID, $property, $this->$property);
 			}
 		}
