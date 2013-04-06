@@ -10,7 +10,7 @@ class Mvied_Model {
 	/**
 	 * Post
 	 *
-	 * @var stdClass
+	 * @var Mvied_Post
 	 */
 	protected $_post;
 
@@ -35,20 +35,16 @@ class Mvied_Model {
 	 * @return void
 	 */
 	public function __construct( $id ) {
-		if ( ! isset($id) ) {
-			return $this;
-		}
-
-		$this->_post = get_post($id);
-		$this->ID = $this->_post->ID;
-		$this->name = $this->_post->post_title;
+		$this->setPost(new Mvied_Post($id));
+		$this->ID = $this->getPost()->ID;
+		$this->name = $this->getPost()->post_title;
 
 		$reflect = new ReflectionClass($this);
 		$properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC);
 		foreach($properties as $property) {
 			$property = $property->getName();
 			if ( !isset($this->$property) ) {
-				$this->$property = get_post_meta($this->ID, $property, true);
+				$this->$property = $this->getPost()->getPostMeta($property);
 			}
 		}
 	}
@@ -60,17 +56,28 @@ class Mvied_Model {
 	 * @return mixed
 	 */
 	public function __get( $property ) {
-		return get_post_meta($this->ID, $property, true);
+		return $this->getPost()->getPostMeta($property);
 	}
 
 	/**
-	 * Ge Post
+	 * Get Post
 	 *
 	 * @param none
-	 * @return stdClass
+	 * @return Mvied_Post
 	 */
 	public function getPost() {
 		return $this->_post;
+	}
+
+	/**
+	 * Set Post
+	 *
+	 * @param Mvied_Post $post
+	 * @return Mvied_Model
+	 */
+	public function setPost( Mvied_Post $post ) {
+		$this->_post = $post;
+		return $this;
 	}
 
 	/**
@@ -99,7 +106,7 @@ class Mvied_Model {
 		foreach($properties as $property) {
 			$property = $property->getName();
 			if ( !in_array($property, array('ID','name')) && strpos($property, '_') !== 0 ) {
-				update_post_meta($this->_post->ID, $property, $this->$property);
+				$this->getPost()->updatePostMeta($property, $this->$property);
 			}
 		}
 	}
