@@ -22,7 +22,6 @@ interface Mvied_Theme_Module_Interface {
 	 * 
 	 * @param Mvied_Theme_Modular $theme
 	 * @return Mvied_Theme_Module
-	 * @uses Mvied_Theme
 	 */
 	public function setTheme( Mvied_Theme_Modular $theme );
 
@@ -30,7 +29,7 @@ interface Mvied_Theme_Module_Interface {
 	 * Get Theme
 	 * 
 	 * @param none
-	 * @return Mvied_Theme
+	 * @return Mvied_Theme_Modular
 	 */
 	public function getTheme();
 }

@@ -22,7 +22,6 @@ interface Mvied_Plugin_Module_Interface {
 	 * 
 	 * @param Mvied_Plugin_Modular $plugin
 	 * @return Mvied_Plugin_Module
-	 * @uses Mvied_Plugin
 	 */
 	public function setPlugin( Mvied_Plugin_Modular $plugin );
 
@@ -30,7 +29,7 @@ interface Mvied_Plugin_Module_Interface {
 	 * Get Plugin
 	 * 
 	 * @param none
-	 * @return Mvied_Plugin
+	 * @return Mvied_Plugin_Modular
 	 */
 	public function getPlugin();
 }
