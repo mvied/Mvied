@@ -461,24 +461,23 @@ class Mvied_Url {
 	 * Example of usage:
 	 * $site_url = Mvied_Url::fromArray( parse_url( site_url() ) );
 	 *
-	 * @param array $array
+	 * @param array $url_parts
 	 * @return $url Mvied_Url
 	 */
-	public static function fromArray( $array = array() ) {
-		if ( sizeof($array) <= 1 ) {
+	public static function fromArray( $url_parts = array() ) {
+		if ( sizeof($url_parts) <= 1 ) {
 			return false;
 		}
 
 		$url = new Mvied_Url;
-		$url->setScheme(@$array['scheme']);
-		$url->setUser(@$array['user']);
-		$url->setPass(@$array['pass']);
-		$url->setHost(@$array['host']);
-		$url->setPort(@$array['port']);
-		$url->setPath(@$array['path']);
-		$url->setQuery(@$array['query']);
-		$url->setFragment(@$array['fragment']);
-
+		$url->setScheme( isset($url_parts['scheme']) ? $url_parts['scheme'] : null );
+		$url->setUser( isset($url_parts['user']) ? $url_parts['user'] : null );
+		$url->setPass( isset($url_parts['pass']) ? $url_parts['pass'] : null );
+		$url->setHost( isset($url_parts['host']) ? $url_parts['host'] : null );
+		$url->setPort( isset($url_parts['port']) ? $url_parts['port'] : null );
+		$url->setPath( isset($url_parts['path']) ? $url_parts['path'] : null );
+		$url->setQuery( isset($url_parts['query']) ? $url_parts['query'] : null );
+		$url->setFragment( isset($url_parts['fragment']) ? $url_parts['fragment'] : null );
 		return $url;
 	}
 
