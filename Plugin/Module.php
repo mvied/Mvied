@@ -13,7 +13,7 @@ class Mvied_Plugin_Module implements Mvied_Plugin_Module_Interface {
 	/**
 	 * Plugin object that this module extends
 	 *
-	 * @var Mvied_Plugin
+	 * @var Mvied_Plugin_Modular
 	 */
 	protected $_plugin;
 
@@ -32,7 +32,6 @@ class Mvied_Plugin_Module implements Mvied_Plugin_Module_Interface {
 	 * 
 	 * @param Mvied_Plugin_Modular $plugin
 	 * @return object $this
-	 * @uses Mvied_Plugin
 	 */
 	public function setPlugin( Mvied_Plugin_Modular $plugin ) {
 		$this->_plugin = $plugin;		
@@ -43,7 +42,7 @@ class Mvied_Plugin_Module implements Mvied_Plugin_Module_Interface {
 	 * Get Plugin
 	 * 
 	 * @param none
-	 * @return Mvied_Plugin
+	 * @return Mvied_Plugin_Modular
 	 */
 	public function getPlugin() {
 		if ( ! isset($this->_plugin) ) {
