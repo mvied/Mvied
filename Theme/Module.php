@@ -34,7 +34,7 @@ class Mvied_Theme_Module implements Mvied_Theme_Module_Interface {
 	 * @return object $this
 	 * @uses Mvied_Theme
 	 */
-	public function setTheme( Mvied_Theme_Modular $theme ) {
+	public function setTheme( $theme ) {
 		$this->_theme = $theme;
 		return $this;
 	}
