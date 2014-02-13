@@ -34,18 +34,9 @@ class Mvied_Model {
 	 * @param int $id
 	 * @return void
 	 */
-	public function __construct( $id ) {
-		$this->setPost(new Mvied_Post($id));
-		$this->ID = $this->getPost()->ID;
-		$this->name = $this->getPost()->post_title;
-
-		$reflect = new ReflectionClass($this);
-		$properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC);
-		foreach($properties as $property) {
-			$property = $property->getName();
-			if ( !isset($this->$property) ) {
-				$this->$property = $this->getPost()->getPostMeta($property);
-			}
+	public function __construct( $id = null ) {
+		if ($id > 0) {
+			$this->setPost(new Mvied_Post($id));
 		}
 	}
 
@@ -60,12 +51,33 @@ class Mvied_Model {
 	}
 
 	/**
+	 * Get Columns (Meta Data)
+	 * @return array $columns
+	 */
+	public function getColumns() {
+		$columns = array();
+		$reflect = new ReflectionClass($this);
+		$properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC);
+		foreach($properties as $property) {
+			if (strpos($property, '_') !== 0) {
+				$columns[] = $property->getName();
+			}
+		}
+		return $columns;
+	}
+
+	/**
 	 * Get Post
 	 *
 	 * @param none
 	 * @return Mvied_Post
 	 */
 	public function getPost() {
+		if (!$this->_post && !$this->ID) {
+			$this->setPost(new Mvied_Post);
+		} else if ($this->ID) {
+			$this->setPost(new Mvied_Post($this->ID));
+		}
 		return $this->_post;
 	}
 
@@ -77,6 +89,13 @@ class Mvied_Model {
 	 */
 	public function setPost( Mvied_Post $post ) {
 		$this->_post = $post;
+		$this->ID = $post->ID;
+		$this->name = $post->post_title;
+		foreach($this->getColumns() as $column) {
+			if ($this->$column == null) {
+				$this->$column = $this->getPost()->getPostMeta($column);
+			}
+		}
 		return $this;
 	}
 
@@ -88,7 +107,8 @@ class Mvied_Model {
 	 */
 	public function load( $array = array() ) {
 		foreach($array as $key => $value) {
-			if ( property_exists($this, $key) ) {
+			//if model has this column
+			if ( in_array($key, $this->getColumns()) ) {
 				$this->$key = $value;
 			}
 		}
@@ -101,12 +121,10 @@ class Mvied_Model {
 	 * @return void
 	 */
 	public function save() {
-		$reflect = new ReflectionClass($this);
-		$properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC);
-		foreach($properties as $property) {
-			$property = $property->getName();
-			if ( !in_array($property, array('ID','name')) && strpos($property, '_') !== 0 ) {
-				$this->getPost()->updatePostMeta($property, $this->$property);
+		$this->getPost()->save();
+		foreach($this->getColumns() as $column) {
+			if ( !in_array($column, array('ID','name')) ) {
+				$this->getPost()->updatePostMeta($column, $this->$column);
 			}
 		}
 	}
