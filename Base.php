@@ -51,6 +51,9 @@ class Mvied_Base {
 	 */
 	protected $_view_directory;
 
+	protected $_option_cache = array();
+	protected $_blog_option_cache = array();
+
 	/**
 	 * Set Directory
 	 * 
@@ -107,9 +110,21 @@ class Mvied_Base {
 	public function getSetting( $setting, $blog_id = 0 ) {
 		$setting_full = $this->getSlug() . '_' . $setting;
 		if ( $blog_id > 0 ) {
-			$value = get_blog_option($blog_id, $setting_full);
+			if (!isset($this->_blog_option_cache[$blog_id]))
+				$this->_blog_option_cache[$blog_id] = array();
+			if (isset($this->_blog_option_cache[$blog_id][$setting_full]))
+				$value = $this->_blog_option_cache[$blog_id][$setting_full];
+			else {
+				$value = get_blog_option($blog_id, $setting_full);
+				$this->_blog_option_cache[$blog_id][$setting_full] = $value;
+			}
 		} else {
-			$value = get_option($setting_full);
+			if (isset($this->_option_cache[$setting_full]))
+				$value = $this->_option_cache[$setting_full];
+			else {
+				$value = get_option($setting_full);
+				$this->_option_cache[$setting_full] = $value;
+			}
 		}
 
 		// Load default option
