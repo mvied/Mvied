@@ -133,7 +133,9 @@ class Mvied_Post {
 	 * @return mixed
 	 */
 	public function getPostMeta( $meta_key, $single = true ) {
-		return get_post_meta($this->ID, $meta_key, $single);
+		if ($this->ID) {
+			return get_post_meta($this->ID, $meta_key, $single);
+		}
 	}
 
 	/**
@@ -144,7 +146,9 @@ class Mvied_Post {
 	 * @return mixed
 	 */
 	public function updatePostMeta($meta_key, $meta_value) {
-		return update_post_meta($this->ID, $meta_key, $meta_value);
+		if ($this->ID) {
+			return update_post_meta($this->ID, $meta_key, $meta_value);
+		}
 	}
 
 	/**

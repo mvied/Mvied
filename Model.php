@@ -93,7 +93,7 @@ class Mvied_Model {
 		$this->name = $post->post_title;
 		foreach($this->getColumns() as $column) {
 			if ($this->$column == null) {
-				$this->$column = $this->getPost()->getPostMeta($column);
+				$this->$column = $post->getPostMeta($column);
 			}
 		}
 		return $this;
@@ -121,10 +121,10 @@ class Mvied_Model {
 	 * @return void
 	 */
 	public function save() {
-		$this->getPost()->save();
+		$this->_post->save();
 		foreach($this->getColumns() as $column) {
 			if ( !in_array($column, array('ID','name')) ) {
-				$this->getPost()->updatePostMeta($column, $this->$column);
+				$this->_post->updatePostMeta($column, $this->$column);
 			}
 		}
 	}
